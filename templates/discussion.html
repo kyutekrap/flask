@@ -1,0 +1,204 @@
+
+
+      <div class="left">
+        <div class="basic">
+          <text style="font-family: Bold">E-mini NASDAQ</text><br/>
+          <text style="font-family: Medium; color: #f95959; font-size: 3em;">100</text><br/>
+          <small style="font-family: Light;">전일대비 +10 (0.5%)</small><br/><br/>
+          <small style="font-family: Light; color: grey;">최고 130 | 최저 80<br/>
+          거래량: 1,000 (10만+)</small>
+          </div>
+
+            <div class="line">
+              <canvas id="myChart" style="width:100%;"></canvas>
+              <script>
+              var xValues = [50,60,70,80,90,100,110,120,130,140,150];
+              var yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+              new Chart("myChart", {
+                type: "line",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(153, 0, 204)",
+                    borderColor: "rgb(204, 153, 255)",
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {display: false},
+                  scales: {
+                    yAxes: [{ticks: {display: false},
+                      gridLines: {display: false}}],
+                    xAxes: [{ticks: {display: false},
+                    gridLines: {display: false}}],
+                  }
+                }
+              });
+              </script>
+              </div>
+
+              <table id="table">
+              </table>
+
+        </div>
+
+          <div class="right">
+            <div class="container">
+              <div class="top" id="div"></div>
+
+              <div class="bottom">
+                <div id="link"></div><br/><br/>
+                <div onclick="copy('안녕하세요')">안녕하세요</div><div onclick="copy('ㅋㅋㅋ')">ㅋㅋㅋ</div><div onclick="copy('ㅎㅇㅌ')">ㅎㅇㅌ</div><div onclick="copy('ㅠㅠ')">ㅠㅠ</div>
+                <input type="text" placeholder="생각을 공유하세요....." class="text" id="text" onkeyup="check_url()";  />
+              </div>
+              </div>
+            </div>
+
+      {% for item in item_info: %}
+      <input style="display: none;" value="{{ item[1] }}" id="item_id" />
+      <input style="display: none;" value="{{ item[0] }}" id="name" />
+      {% endfor %}
+
+            <script>
+            var item_id = $("#item_id").val();
+            var name = $("#name").val();
+
+            $('#text').keypress(function (e) {
+                          if (e.which == 13) {
+                             var text = $("#text").val();
+
+                             var link = $("#link").text();
+
+                             if (text != "") {
+
+                             if (link != "") {
+                             let data = {text: text, item_id: item_id, name: name, link: link};
+                             let jsonStr = JSON.stringify(data);
+
+                             $.ajax({
+                              type: 'POST',
+                              url: '/add_news',
+                              data: JSON.stringify(data),
+                              contentType: "application/json; charset=UTF-8",
+                              success: function(response) {
+                                $("#text").val('');
+
+                                $.ajax({
+                                  url: "/reload_news",
+                                  type: "get",
+                                  data: { item_id: item_id },
+                                  success: function(response) {
+                                    $("#table").html(response);
+                                  }
+                                });
+
+                              }
+                             })
+
+                             } else {
+                             let data = {text: text, item_id: item_id, name: name};
+                             let jsonStr = JSON.stringify(data);
+
+                                $.ajax({
+            		              type: 'POST',
+            	    	          url: '/add_chat',
+            	    	          data: JSON.stringify(data),
+            	    	          contentType: "application/json; charset=UTF-8",
+            	    	          success: function(response) {
+            	    	            $('#text').val('');
+
+            	    	            $.ajax({
+                                    url: "/reload_chat",
+                                    type: "get",
+                                    data: { item_id: item_id },
+                                    success: function(response) {
+                                        $("#div").html(response);
+                                      }
+                                   });
+                		           }
+                    	        })
+                               }
+                             }
+                          }
+                        });
+
+            $(document).ready(function() {
+            $.ajax({
+              url: "/reload_chat",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#div").html(response);
+              }
+            });
+
+            $.ajax({
+              url: "/reload_news",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#table").html(response);
+              }
+            });
+
+            });
+
+            window.setInterval(function() {
+            $.ajax({
+              url: "/reload_chat",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#div").html(response);
+              }
+            });
+            }, 5000);
+
+            window.setInterval(function() {
+            $.ajax({
+              url: "/reload_news",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#table").html(response);
+              }
+            });
+            }, 5000);
+
+            function copy(x) {
+              document.getElementById("text").value = x;
+              document.getElementById("text").focus();
+            }
+
+            $(document).ready(function () {
+              $("#link").click(function () {
+                $("#link").val('');
+                $("#link").css('display', 'none');
+
+                $("#text").attr("placeholder", "생각을 공유하세요.....");
+              });
+            });
+
+            function check_url()
+            {
+             var regex = /https?:\/\/[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g;
+             if($('#text').val().match(regex))
+             {
+
+              let result = $('#text').val().match(regex);
+
+              $("#link").css("display", "block");
+              $("#link").text(result);
+
+              $('#text').val('');
+
+              $("#text").attr("placeholder", "기사를 설명해주세요.");
+
+            }
+            }
+            </script>
+      </body>
+      </html>

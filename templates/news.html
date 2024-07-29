@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                {% for x in chatlist %}
+                {% for new in list %}
+                            <tr>
+                                <td class="h0">{{ new[0] }}</td>
+                                <td class="h1">{{ new[1] }}</td>
+                                <td class="h2"><a href="{{ new[4] }}">{{ new[3] }}</a></td>
+                            </tr>
+                {% endfor %}
+                {% endfor %}
+</body>
+</html>

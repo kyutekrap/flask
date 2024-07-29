@@ -1,0 +1,515 @@
+<html>
+<head>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: rgba(223, 223, 240, 0.6);
+    }
+    .divider {
+      float: left;
+      width: calc(50% - 40px);
+      padding: 20px;
+      margin-bottom: 150px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+      padding-top: 10px;
+    }
+    .menu {
+      font-size: 1.2em;
+      font-family: Bold;
+      padding-bottom: 7px;
+    }
+    .submenu {
+      color: grey;
+      font-size: 0.9em;
+      font-family: Light;
+    }
+    table {
+      font-family: Light;
+      color: grey;
+      margin-bottom: 20px;
+      width: 100%;
+      table-layout: fixed
+    }
+    table tr th {
+      text-align: left;
+    }
+    .h0 {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .h5 {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    tr:hover td {
+      background-color: white;
+      color: black;
+    }
+    table, td, tr {
+      border-collapse: collapse;
+    }
+    td, th {
+      padding: 10px;
+    }
+    .right_parent {
+      padding: 10px;
+      width: calc(100% - 10px);
+      float: left;
+      margin-bottom: 20px;
+    }
+    .right {
+      float: left;
+      background-color: rgba(186, 187, 211, 0.2);
+      padding: 1em;
+      border-radius: 1.5em;
+      margin-right: 10px;
+    }
+    .button {
+      width: 100%;
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-radius: 10px;
+      background-color: white;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .codename {
+      color: grey;
+      margin-top: 5px;
+    }
+    .conditions {
+      margin-top: 5px;
+    }
+    .date {
+      font-family: Medium;
+    }
+    .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 9em;
+    background-color: rgba(186, 187, 211);
+    padding-top: 1.5em;
+    }
+    .footer div {
+    text-align: center;
+    font-family: Light;
+    padding: 0.3em;
+    font-size: 0.9em;
+    }
+
+    :root{
+      --bg-shape-color:linear-gradient(120deg,  #343A4F, #0F1620) ;
+     --lightblue: #3D9DEA;
+     --darkblue: #4A4EEE;
+    }
+
+    .wrapper{
+      border-radius: 40px;
+      background-image: var(--bg-shape-color);
+      color: white;
+      float: left;
+      margin: 5px;
+    }
+    .overviewInfo, .productSpecifications {
+      padding: 24px;
+    }
+    .overviewInfo{
+      background-image:  linear-gradient(176deg, var(--lightblue), var(--darkblue));
+    }
+
+    .checkoutButton {
+        display: flex;
+        width: calc(100% - 20px);
+        background-image: var(--bg-shape-color);
+        border-radius: 12px;
+        overflow: hidden;
+            box-shadow: -2px -2px 2px 0px rgba(80, 80, 80, 0.1), 2px 2px 3px 0px rgba(12, 12, 12, 0.3), inset 0px 0px 0px 2px rgba(80, 80, 80, 0.2);
+        margin-top: 30px;
+        padding: 10px;
+        height: 2em;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .priceTag {
+        display: flex;
+        align-items: center;
+        font-size: 32px;
+    }
+
+    .priceTag span {
+        color: #488dc7;
+        font-size: 20px;
+    }
+
+    button.preorder {
+        outline: 0;
+        border: 0;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background-image: linear-gradient(85deg, #61c7ef, #4833fb);
+        color: white;
+        height: 2.5em;
+    }
+
+    .number_input {
+      background: transparent;
+      color: white;
+      border: 0px;
+    }
+    </style>
+    </head>
+    <body>
+      <div class="divider">
+        <ul style="margin-left: -10px;">
+                      <li class="menu">주요일정</li>
+                      <li class="submenu">없음</li>
+        </ul>
+        <div class="right_parent">
+            {% if SBA_info != "none" %}
+            {% for x in SBA_info %}
+          <div class="right">
+            <div><small>납부일</small>
+              <br/><text class="date">00/00/00</text></div>
+            <div class="conditions"><small><b>합의조건:</b></small>
+              <br/>납부: <text id="SBA_pay">{{ x[0] }}price</text>원
+                <br/>수취: <text id="SBA_get">{{ x[9] }}misc2</text>토큰</div>
+            <div class="codename"><small>식별명: Small Blind A</small></div>
+            <div class="button" id="pay_SBA">납부</div>
+            <div class="button" id="cancel_SBA">해지</div>
+          </div>
+            {% endfor %}
+            {% endif %}
+            {% if SBB_info != "none" %}
+            {% for x in SBB_info %}
+          <div class="right">
+            <div><small>만기일</small>
+              <br/><text class="date">{{ x[9] }}misc</text></div>
+            <div class="conditions"><small><b>합의조건:</b></small>
+                <br/>납부: <text id="SBB_pay">{{ x[10] }}misc2</text>>토큰
+                <br/>수취: <text id="SBB_get">{{ x[0] }}price</text>원</div>
+            <div class="codename"><small>식별명: Small Blind B</small></div>
+              {% if isDue != "premature" %}
+            <div class="button" id="cancel_SBB">콜</div>
+              {% elif isDue == "true" %}
+            <div class="button" id="pay_SBB">만기</div>
+              {% endif %}
+          </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+          <script>
+          if ({{ action }} == "failed_SBA") {
+            alert('주의 : 충전이 필요합니다');
+          } else if ({{ action }} == "failed_BB") {
+            alert('주의 : Big Blind가 부족합니다');
+          }
+
+          $("#pay_SBA").click( function() {
+
+          SBA_pay = $("#SBA_pay").val();
+          SBA_get = $("#SBA_get").val();
+
+          let data = {SBA_pay: SBA_pay, SBA_get: SBA_get};
+          let jsonStr = JSON.stringify(data);
+
+          $.ajax({
+		    type: 'POST',
+	    	url: '/pay_SBA',
+	    	data: JSON.stringify(data),
+            contentType: "application/json; charset=UTF-8",
+	    	success: function(res) {
+	    	  // refresh page
+    		}
+        	});
+          });
+
+          $("#pay_SBB").click( function() {
+
+          SBB_pay = $("#SBB_pay").val();
+          SBB_get = $("#SBB_get").val();
+
+          let data = {SBB_pay: SBB_pay, SBB_get: SBB_get};
+          let jsonStr = JSON.stringify(data);
+
+          $.ajax({
+		    type: 'POST',
+	    	url: '/pay_SBB',
+	    	data: JSON.stringify(data),
+            contentType: "application/json; charset=UTF-8",
+	    	success: function(res) {
+	    	  // refresh page
+    		}
+        	});
+          });
+
+          $("#cancel_SBA").click( function() {
+          $.ajax({
+		    type: 'POST',
+	    	url: '/cancel_SBA',
+	    	data: { data: 'data' },
+	    	success: function(res) {
+	    	  // refresh page
+    		}
+        	});
+          });
+
+          $("#cancel_SBB").click( function() {
+          $.ajax({
+		    type: 'POST',
+	    	url: '/cancel_SBB',
+	    	data: { data: 'data' },
+	    	success: function(res) {
+	    	  // refresh page
+    		}
+        	});
+          });
+          </script>
+
+        <ul style="margin-left: -10px;">
+                      <li class="menu">미결재 거래</li>
+                      <li class="submenu">미승인 주문은 장 마감 시 소멸됩니다</li>
+        </ul>
+          <div id="refresh_tb">
+        <table>
+          <tr>
+              <th class="h0">일시</th>
+              <th class="h1">내용</th>
+              <th class="h2">액면가</th>
+              <th class="h3">기타</th>
+              <th class="h4">상태</th>
+              <th class="h5">취소</th>
+          </tr>
+            {% for data in pending_data %}
+            <tr>
+              <td class="h0">{{ data[0] }}</td>
+              <td class="h1">{{ data[1] }}</td>
+              <td class="h2">{{ data[2] }}</td>
+              <td class="h3">{{ data[3] }}</td>
+              <td class="h4">{{ data[4] }}</td>
+                {% if data[5] == "uncleared" %}
+              <td class="h5" onclick="cancel({{ data[5] }})">cancel</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+              </div>
+
+          <script>
+              function cancel(x) {
+                $.ajax({
+		    type: 'POST',
+	    	url: '/cancel_BB',
+	    	data: { data: x },
+	    	success: function(res) {
+	    	  $("#refresh_tb").html(res);
+    		}
+        	});
+              }
+          </script>
+
+          <ul style="margin-left: -10px;">
+            <li class="menu">결재내역</li>
+            <li class="submenu">청산된 거래내역 표시란</li>
+          </ul>
+          <table>
+            <tr>
+                <th class="h0">일시</th>
+                <th class="h1">내용</th>
+                <th class="h2">액면가</th>
+                <th class="h5">기타</th>
+            </tr>
+              {% for data in cleared_data %}
+              <tr>
+                  <td class="h0">{{ data[0] }}</td>
+                  <td class="h1">{{ data[1] }}</td>
+                  <td class="h2">{{ data[2] }}</td>
+                  <td class="h5">{{ data[3] }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+        </div>
+        <div class="divider">
+            <ul style="margin-left: -10px;">
+            <li class="menu">출금</li>
+            <li class="submenu">장외시간에 출금요청할 경우 익일 집행됩니다</li>
+          </ul>
+            <div class="wrapper">
+          <div class="productSpecifications">
+              {% for user in userinfo %}
+            <div><input value="{{ user[7] }}" placeholder="은행/코인" name="coin_name" readonly id="check_bank" /> </div>
+              {% endfor %}
+            <div class="productFeatures">
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>출금가능</strong></div>
+                     {% for user in userinfo %}
+                  <div>{{ user[5] }}원</div>
+                     {% endfor %}
+                </div>
+               </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>계좌번호</strong></div>
+                     {% for user in userinfo %}
+                  <div id="check_number">{{ user[6] }}</div>
+                     {% endfor %}
+                </div>
+                </div>
+            </div>
+              <form method="post" action="{{ url_for('extract') }}">
+            <div class="checkoutButton">
+              <div class="priceTag">
+                <span>\</span><input type="number" value="1" class="number_input" name="change_amt" id="change_amt" />
+              </div>
+              <button class="preorder" type="button" onclick="check_balance();">
+                <p>출금</p>
+              </button>
+                <input type="submit" style="display: none;" id="extract_btn" />
+                </form>
+            </div>
+          </div>
+          </diV>
+
+      <script>
+          function check_balance() {
+          var amt = document.getElementById("change_amt").value;
+          var balance = {{ ticket_total }};
+
+          if amt <= balance {
+
+            var check_bank = document.getElementById('check_bank').value;
+            var check_number = document.getElementById('check_number').value;
+
+            if (check_bank != "" && check_number != "") {
+                document.getElementById("extract_btn").click();
+            } else {
+                alert('주의 : 출금정보를 확인하세요');
+            }
+          }
+          }
+      </script>
+
+            <ul style="margin-left: -10px;">
+            <li class="menu">입금</li>
+            <li class="submenu">장외시간에 입금신고할 경우 익일 집행됩니다</li>
+          </ul>
+
+            <form method="post" action="{{ url_for('charge') }}">
+          <div class="wrapper">
+          <div class="productSpecifications">
+            <div><input value="은행" name="coin_name" readonly /> </div>
+            <div class="productFeatures">
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>계좌정보</strong></div>
+                  <div>IBK기업은행 13467890</div>
+                </div>
+               </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>식별메모</strong></div>
+                  <div><input value="{{ memo }}" name="memo" readonly /></div>
+                </div>
+                </div>
+            </div>
+            <div class="checkoutButton">
+              <div class="priceTag">
+                <span>\</span><input type="number" value="1" class="number_input" name="value" />
+              </div>
+              <button class="preorder" type="submit">
+                <p>충전</p>
+              </button>
+            </div>
+          </div>
+          </diV>
+                </form>
+            <div id="crypto">
+
+            {% for info in cryptos %}
+                <form method="post" action="{{ url_for('charge') }}">
+          <div class="wrapper">
+          <div class="productSpecifications">
+            <div><input value="{{ info[0] }}" name="coin_name" readonly /> </div>
+            <div> <text class="countdown">15</text>초 후에 재로딩... </div><br/>
+            <div class="productFeatures">
+              <div class="feature">
+                <div class="featureText">
+                  <div><strong>시세</strong></div>
+                  <div>{{ info[2] }}원</div>
+                </div>
+              </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>출금주소</strong></div>
+                  <div>{{ info[1] }}</div>
+                </div>
+               </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>식별메모</strong></div>
+                  <div><input value="{{ memo }}" name="memo" readonly /></div>
+                </div>
+                </div>
+            </div>
+            <div class="checkoutButton">
+              <div class="priceTag">
+                <span>\</span><input type="number" value="1" class="number_input" name="value" />
+              </div>
+              <button class="preorder" type="submit">
+                <p>충전</p>
+              </button>
+            </div>
+          </div>
+          </diV>
+                </form>
+            {% endfor %}
+
+                </div>
+
+<script>
+var timeleft = 15;
+var downloadTimer = setInterval(function(){
+
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+
+    $.ajax({
+		    type: 'POST',
+	    	url: '/refresh_upbit',
+	    	data: { data: 'data' },
+	    	success: function(res) {
+	    	  $("#crypto").html(res);
+    		}
+        	});
+
+  } else {
+    var countdown = document.getElementsByClassName('countdown');
+    for (var i = 0; i < countdown.length; i++) {
+      countdown[i].innerHTML = timeleft;
+    }
+  }
+  timeleft -= 1;
+}, 1000);
+</script>
+
+          </div>
+
+    <div class="footer">
+        <div>주중 9:00 ~ 15:00시</div>
+        <div>장외시간에는 Big Blind, Small Blind, 원화 충전 등 금전적 거래 및 고객상담이 제한됩니다</div>
+        <div>고객상담이 필요하면 카카오톡 "딜러콜"에 문의해주세요</div>
+        <div>(C) 동계기술 2022</div>
+    </div>
+      </body>
+      </html>

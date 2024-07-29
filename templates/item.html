@@ -1,0 +1,433 @@
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+  <style>
+    @font-face { font-family: Medium; src: url('/static/esamanruMedium.ttf'); }
+    @font-face { font-family: Light; src: url('/static/esamanruLight.ttf'); }
+    @font-face { font-family: Bold; src: url('/static/esamanruBold.ttf'); }
+    * {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: rgba(223, 223, 240, 0.6);
+      width: 100%;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+      padding-top: 10px;
+    }
+    .menu {
+      font-size: 20px;
+      font-family: Bold;
+      padding-bottom: 7px;
+    }
+    .submenu {
+      color: grey;
+      font-size: 1em;
+      font-family: Light;
+    }
+
+    .content {
+      width: 60%;
+      margin-left: 20px;
+      padding-top: 10px;
+      float: left;
+    }
+
+    .news, .local_chart {
+      width: 100%;
+    }
+    .news {
+    float: left;
+    }
+    .news table {
+      width: 100%;
+      font-family: Light;
+      color: grey;
+    }
+    .news table {
+      margin-bottom: 30px;
+      margin-top: 10px;
+    }
+    .news table .h5 {
+      width: 3em;
+    }
+    .news table .h5 img {
+      cursor: pointer;
+      filter: invert(40%);
+    }
+    .news table .h5 img:hover {
+      filter: invert(0%);
+    }
+    .news table tr td {
+      padding: 10px;
+    }
+    .news table tr .h0 {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    .news table tr .h5 {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      text-align: right;
+    }
+    .news table tr:hover td {
+      background-color: white;
+    }
+    .news table, .news tr, .news td {
+      border-collapse: collapse;
+    }
+
+    .local_chart .container {
+      width: 100%;
+    }
+    .local_chart .left {
+      width: 40%;
+      float: left;
+      max-width: 20em;
+    }
+    .local_chart .right {
+      float: left;
+      display: inline-block;
+    }
+
+input:focus {
+  outline: none;
+}
+
+.news table tr .h0 {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 20%;
+}
+.news table tr .h1 {
+  width: 20%;
+}
+.news table .h2 {
+  width: calc(60% - 3em);
+}
+.news table .h2:hover {
+  color: black;
+}
+
+.right .container .bottom .text {
+width: calc(100% - 20px);
+margin-left: 10px;
+box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+border: 0px;
+padding: 10px;
+font-family: Light;
+transition: all 0.3s ease;
+border-radius: 15px;
+margin-bottom: 10px;
+}
+.right .container .text:focus {
+box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.right .container {
+background-color: white;
+border-radius: 15px;
+float: left;
+height: calc(100% - 45px);
+width: calc(40% - 40px);
+margin-top: 20px;
+-webkit-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+-moz-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+position: relative;
+}
+.right .container .top {
+width: calc(100% - 40px);
+height: calc(100% - 100px);
+padding: 20px;
+overflow-y: auto;
+}
+.right .container .top::-webkit-scrollbar {
+width: 0px;
+}
+.right .container .text:focus {
+box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.right .container .bottom {
+position: absolute;
+bottom: 0px;
+width: 100%;
+}
+.right .container .bottom div {
+border: 0px;
+background-color: rgba(187,133,171, 0.5);
+font-family: Light;
+border-radius: 15px;
+margin-left: 10px;
+cursor: pointer;
+font-size: 12px;
+margin-bottom: 10px;
+float: left;
+padding: 0.5em;
+}
+.right .container .top::-webkit-scrollbar {
+width: 0px;
+}
+.right .container .top div {
+border-radius: 15px;
+padding: 0.7em;
+background-color: rgba(186, 187, 211, 0.2);
+margin-bottom: 10px;
+display: inline-block;
+min-width: 100px;
+}
+
+@media (max-width: 900px) {
+  .local_chart .left {
+      width: calc(100% - 20px);
+    }
+    .local_chart .right {
+      width: 100%;
+    }
+    .h0, .h1 {
+      display: none;
+    }
+    .h2 {
+      width: 100%;
+    }
+    .content {
+      width: 50%;
+    }
+    .right .container {
+width: calc(50% - 40px);
+}
+}
+    </style>
+    </head>
+    <body>
+
+    <script>
+        //redirect for small devices
+        if (screen.width <= 699) {
+          document.location = "w3docs.com";
+        }
+    </script>
+
+<div class="content">
+          <div class="local_chart">
+              <div class="container">
+
+            <div class="right">
+            <ul style="padding-left: 10;">
+              <li class="submenu"><small>지표</small></li>
+              <li class="submenu">E-mini NASDAQ</li>
+              <li class="menu">${{ tick_price }}</li>
+                {% if sign == "decrease" %}
+              <li class="submenu" style="color: #455d7a;; margin-top: -5px;">-{{ rate }}%</li>
+                {% elif sign == "increase" %}
+              <li class="submenu" style="color: #f95959; margin-top: -5px;">+{{ rate }}%</li>
+                {% elif sign == "equal" %}
+              <li class="submenu" style="color: grey; margin-top: -5px;">{{ rate }}%</li>
+                {% endif %}
+            </ul>
+            </div>
+
+            <div class="left">
+                  <canvas id="myChart0"></canvas>
+                  <script>
+                  var xValues = {{ labels }};
+                  var yValues = {{ data }};
+
+                  new Chart("myChart0", {
+                    type: "line",
+                    data: {
+                      labels: xValues,
+                      datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgb(153, 0, 204)",
+                        borderColor: "rgb(204, 153, 255)",
+                        data: yValues
+                      }]
+                    },
+                    options: {
+                      legend: {display: false},
+                      scales: {
+                        yAxes: [{ display: false }],
+                        xAxes: [{ display: false }],
+                      }
+                    }
+                  });
+                  </script>
+                  </div>
+
+                </div>
+            </div>
+
+          <div class="news">
+              <ul style="padding-left: 10;">
+                <li class="menu">이슈공유</li>
+                <li class="submenu">채팅으로 인용된 기사가 아래 표시됩니다</li>
+              </ul>
+                <table id="table">
+              </table>
+              </div>
+
+          </div>
+
+                <div class="right">
+                    <div class="container">
+                      <div class="top" id="div"></div>
+                      <div class="bottom">
+                        <div onclick="copy('안녕하세요')">안녕하세요</div><div onclick="copy('ㅋㅋㅋ')">ㅋㅋㅋ</div><div onclick="copy('ㅎㅇㅌ')">ㅎㅇㅌ</div><div onclick="copy('ㅠㅠ')">ㅠㅠ</div>
+                        <input type="text" placeholder="생각을 공유하세요..." class="text" id="text" />
+                      </div>
+                      </div>
+                    </div>
+
+    {% for item in item_info: %}
+      <input style="display: none;" value="{{ item[1] }}" id="item_id" />
+      <input style="display: none;" value="{{ item[0] }}" id="name" />
+      {% endfor %}
+
+            <script>
+            var item_id = $("#item_id").val();
+            var name = $("#name").val();
+
+            $('#text').keypress(function (e) {
+                          if (e.which == 13) {
+                             var text = $("#text").val();
+
+                             var link = $("#link").text();
+
+                             if (text != "") {
+
+                             if (link != "") {
+                             let data = {text: text, item_id: item_id, name: name, link: link};
+                             let jsonStr = JSON.stringify(data);
+
+                             $.ajax({
+                              type: 'POST',
+                              url: '/add_news',
+                              data: JSON.stringify(data),
+                              contentType: "application/json; charset=UTF-8",
+                              success: function(response) {
+                                $("#text").val('');
+
+                                $.ajax({
+                                  url: "/reload_news",
+                                  type: "get",
+                                  data: { item_id: item_id },
+                                  success: function(response) {
+                                    $("#table").html(response);
+                                  }
+                                });
+
+                              }
+                             })
+
+                             } else {
+                             let data = {text: text, item_id: item_id, name: name};
+                             let jsonStr = JSON.stringify(data);
+
+                                $.ajax({
+            		              type: 'POST',
+            	    	          url: '/add_chat',
+            	    	          data: JSON.stringify(data),
+            	    	          contentType: "application/json; charset=UTF-8",
+            	    	          success: function(response) {
+            	    	            $('#text').val('');
+
+            	    	            $.ajax({
+                                    url: "/reload_chat",
+                                    type: "get",
+                                    data: { item_id: item_id },
+                                    success: function(response) {
+                                        $("#div").html(response);
+                                      }
+                                   });
+                		           }
+                    	        })
+                               }
+                             }
+                          }
+                        });
+
+            $(document).ready(function() {
+            $.ajax({
+              url: "/reload_chat",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#div").html(response);
+              }
+            });
+
+            $.ajax({
+              url: "/reload_news",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#table").html(response);
+              }
+            });
+
+            });
+
+            window.setInterval(function() {
+            $.ajax({
+              url: "/reload_chat",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#div").html(response);
+              }
+            });
+            }, 5000);
+
+            window.setInterval(function() {
+            $.ajax({
+              url: "/reload_news",
+              type: "get",
+              data: { item_id: item_id },
+             success: function(response) {
+                $("#table").html(response);
+              }
+            });
+            }, 5000);
+
+            function copy(x) {
+              document.getElementById("text").value = x;
+              document.getElementById("text").focus();
+            }
+
+            $(document).ready(function () {
+              $("#link").click(function () {
+                $("#link").val('');
+                $("#link").css('display', 'none');
+
+                $("#text").attr("placeholder", "생각을 공유하세요.....");
+              });
+            });
+
+            function check_url()
+            {
+             var regex = /https?:\/\/[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g;
+             if($('#text').val().match(regex))
+             {
+
+              let result = $('#text').val().match(regex);
+
+              $("#link").css("display", "block");
+              $("#link").text(result);
+
+              $('#text').val('');
+
+              $("#text").attr("placeholder", "기사를 설명해주세요.");
+
+            }
+            }
+            </script>
+
+      </body>
+      </html>

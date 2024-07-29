@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="SBA_rows1"></div>
+<script>
+  var str = "{{ SBA_rows }}",
+      i = 0,
+      isTag,
+      text;
+
+  (function type() {
+      text = str.slice(0, ++i);
+      if (text === str) return;
+
+      document.getElementById('SBA_rows1').innerHTML = text;
+
+      var char = text.slice(-1);
+      if( char === '<' ) isTag = true;
+      if( char === '>' ) isTag = false;
+
+      if (isTag) return type();
+      setTimeout(type, 80);
+  }());
+</script>
+</body>
+</html>

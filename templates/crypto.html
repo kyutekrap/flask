@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{% for info in cryptos %}
+          <div class="wrapper">
+          <div class="productSpecifications">
+            <div> {{ info[0] }} </div>
+            <div> <text class="countdown">15</text>초 후에 재로딩... </div><br/>
+            <div class="productFeatures">
+              <div class="feature">
+                <div class="featureText">
+                  <div><strong>시세</strong></div>
+                  <div>{{ info[2] }}원</div>
+                </div>
+              </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>출금주소</strong></div>
+                  <div>{{ info[1] }}</div>
+                </div>
+               </div><br/>
+              <div class="feature">
+                 <div class="featureText">
+                  <div> <strong>식별메모</strong></div>
+                  <div>{{ memo }}</div>
+                </div>
+                </div>
+            </div>
+            <div class="checkoutButton">
+              <div class="priceTag">
+                <span>\</span><input type="number" value="1" class="number_input" />
+              </div>
+              <button class="preorder">
+                <p>충전</p>
+              </button>
+            </div>
+          </div>
+          </diV>
+            {% endfor %}
+</body>
+</html>

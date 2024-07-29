@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                {% for x in chatlist %}
+                {% for chat in list %}
+                <div id="test id"><small style="font-family: Light">{{ chat[0] }}</small><br/>
+                <text style="font-family: Medium;">{{ chat[1] }}</text><br/>
+                <small style="font-family: Light; color: grey;">방금</small><text onclick="del({{ chat[2] }})"></text></div><br/>
+                {% endfor %}
+                {% endfor %}
+</body>
+</html>

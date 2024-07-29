@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+                <tr class="high">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ high2 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ high2_quantity }}</button></td>
+                    </form>
+
+                  <td class="price1_high">{{ high2 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ high2 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ high2_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="high">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ high1 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ high1_quantity }}</button></td>
+                    </form>
+
+                    <td class="price1_high">{{ high1 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ high1_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="pv">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ spot_quantity }}</button></td>
+                    </form>
+
+                    <td class="price1">{{ spot }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ spot_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="low">
+                  <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ low1 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ low1_quantity }}</button></td>
+                  </form>
+
+                    <td class="price1_low">{{ low1 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ low1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ low1_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="low">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ low2 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ low2_quantity }}</button></td>
+                    </form>
+                  <td class="price1_low">{{ low2 }}</td>
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ low2 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ low2_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+              </table>
+</body>
+</html>

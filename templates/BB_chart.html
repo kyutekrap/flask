@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="tri_left">
+                <div class="interest">전일대비</div>
+                  {% if spot_trend == "increase" %}
+                <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                  {% elif spot_trend == "decrease" %}
+                <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                  {% elif spot_trend == "equal" %}
+                <div class="icon" style="background-color: grey;">&#8681;</div>
+                  {% endif %}
+                <div class="rate">{{ spot_rate }}%</div>
+              </div>
+
+              <canvas id="bigblind_line" style="width:100%; "></canvas>
+              <script>
+
+            const list = [
+              {% for x in BB_dates %}
+              {% if not loop.last %}
+              '{{ x }}',
+              {% elif loop.last %}
+              '{{ x }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+              var xValues = list;
+              var yValues = {{ BB_values }};
+
+              new Chart("bigblind_line", {
+                type: "line",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(153, 0, 204)",
+                    borderColor: "rgb(204, 153, 255)",
+                    data: yValues
+                  }]
+                },
+                options: {
+                elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
+                  legend: {display: false},
+                  scales: {
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                                }
+                            }]
+                        }
+                }
+              });
+              </script>
+</body>
+</html>

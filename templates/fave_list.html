@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<table class="top">
+                        {% for fav in favorable_up %}
+                      <tr><a href="{{ url_for('item', id=fav[1]) }}">
+                        <td class="header1">{{ loop.index }}.</td>
+                        <td class="header2">
+                            {{ fav[0] }}
+                        </td>
+                        <td class="header3">{{ fav[2] }}%</td>
+                      </a></tr>
+                        {% endfor %}
+                    </table>
+                    <div class="line"></div>
+                    <table class="bottom">
+                        {% for fav in favorable_down %}
+                      <tr><a href="{{ url_for('item', id=fav[1]) }}">
+                        <td class="header1">{{ loop.index }}.</td>
+                        <td class="header2">{{ fav[0] }}</td>
+                        <td class="header3">{{ fav[2] }}%</td>
+                      </a></tr>
+                        {% endfor %}
+                    </table>
+</body>
+</html>

@@ -1,0 +1,2283 @@
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/0c0a7c39cc.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    @font-face { font-family: Medium; src: url('/static/esamanruMedium.ttf'); }
+    @font-face { font-family: Light; src: url('/static/esamanruLight.ttf'); }
+    @font-face { font-family: Bold; src: url('/static/esamanruBold.ttf'); }
+    * {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: rgba(223, 223, 240, 0.6);
+      width: 100%;
+    }
+
+    .fa-2x {
+font-size: 2em;
+}
+.fa {
+position: relative;
+display: table-cell;
+width: 60px;
+height: 36px;
+text-align: center;
+vertical-align: middle;
+font-size:20px;
+}
+.fab {
+float: left;
+display:inline-block;
+transform: rotate(40deg);
+}
+
+.main-menu {
+background-color: rgba(186, 187, 211, 0.2);
+border-right:1px solid #e5e5e5;
+position:fixed;
+top:0;
+bottom:0;
+height:100%;
+left:0;
+-webkit-transition:width .05s linear;
+transition:width .05s linear;
+-webkit-transform:translateZ(0) scale(1,1);
+z-index:1;
+font-family: Light;
+}
+
+.main-menu>ul {
+margin:0;
+}
+
+.main-menu li {
+position:relative;
+display:block;
+width:250px;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color: #404040;
+font-size: 14px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .1s linear;
+transition:all .1s linear;
+}
+
+.main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+height:36px;
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+}
+
+.main-menu .nav-text {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+width:190px;
+}
+
+.main-menu .footer {
+  position:relative;
+  text-align: center;
+  width: 100%;
+}
+
+.main-menu>ul.logout {
+position:absolute;
+left:0;
+bottom:0;
+}
+
+.no-touch .scrollable.hover {
+overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+overflow-y:auto;
+overflow:visible;
+}
+
+a:hover,a:focus {
+text-decoration:none;
+}
+
+nav {
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+-o-user-select:none;
+user-select:none;
+}
+
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+.main-menu li:hover>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+background-color: rgba(186, 187, 211, 1);
+}
+.main-menu .active {
+  background-color: rgba(186, 187, 211, 1);
+}
+
+.profile {
+  width: calc(100% - 60px);
+  margin: 10px;
+  opacity: 1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow:
+    inset -3px -3px 3px rgba(82, 82, 82, 0.2),
+    inset 3px 3px 3px rgba(0, 0, 0, 0.4);
+}
+.profile a {
+  text-decoration: none;
+  font-family: Light;
+  cursor: pointer;
+}
+    .profile .submit_button {
+      border: 0px;
+      background: transparent;
+      font-family: Light;
+      cursor: pointer;
+    }
+    .just_button {
+      border: 0px;
+      background: transparent;
+      cursor: pointer;
+      font-family: Light;
+      margin-top: 1em;
+      margin-left: -3px;
+    }
+    .profile div {
+      margin-bottom: 40px;
+      font-family: Medium;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+      padding-top: 10px;
+    }
+    .menu {
+      font-size: 1.2em;
+      font-family: Bold;
+      padding-bottom: 7px;
+    }
+    .submenu {
+      color: grey;
+      font-size: 0.9em;
+      font-family: Light;
+    }
+
+.content {
+  width: calc(100% - 330px);
+  margin-left: 290px;
+  padding-top: 10px;
+}
+
+.nft, .coin, .issue {
+  width: 100%;
+}
+.nft {
+  background-color: white;
+  border-radius: 15px;
+  float: left;
+  -webkit-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+-moz-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+margin-top: 30px;
+margin-bottom: 10px;
+padding-bottom: 10px;
+}
+.nft td:hover {
+  color: grey;
+}
+    .nft .t1 {
+      float: left;
+      width: calc(33.33% - 20px);
+      font-family: Light;
+      margin: 10px;
+    }
+    .nft .header1 {
+      width: 70%;
+    }
+    .nft .t1 .header1 a {
+    color: black;
+    text-decoration: none;
+    }
+    .nft .t1 .header1 a:hover {
+    color: grey;
+    }
+    .nft .header2 {
+      width: 30%;
+      text-align: center;
+    }
+    .nft .left {
+      float: left;
+      width: 70%;
+    }
+    .nft .right {
+      float: left;
+      width: 30%;
+    }
+    .nft .right div {
+      font-family: Light;
+      text-align: center;
+      margin-top: 55px;
+    }
+
+.news {
+  width: calc(100% + 20px);
+}
+.news table {
+  font-family: Light;
+  color: grey;
+  margin-bottom: 20px;
+  width: 100%;
+}
+    .news table .h2 {
+      width: calc(40% - 3em);
+    }
+    .news table .h2:hover {
+      color: black;
+    }
+    .news table tr .h0 {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      width: 15%;
+    }
+    .news table tr .h1 {
+      width: 15%;
+    }
+    .news table tr .h3, .news table tr .h4 {
+      width: 15%;
+      text-align: center;
+    }
+    .news table tr .h5 {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      text-align: right;
+      width: 3em;
+    }
+    .news table tr .h5 img {
+      filter: invert(30%);
+    }
+    .news table tr .h5 img:hover {
+      filter: invert(0%);
+    }
+    .news table tr:hover td, .analysis table tr:hover td {
+      background-color: white;
+    }
+    .news table, .news tr, .news td {
+      border-collapse: collapse;
+    }
+
+    .coin .left2 {
+  width: 40%;
+  float: left;
+  margin-top: 20px;
+}
+.top_list table {
+  font-family: Light;
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  font-size: 1em;
+}
+.top_list table .header1 {
+  width: 25px;
+}
+.top_list table .header3 {
+  text-align: right;
+  width: 50px;
+}
+.top_list .top .header3 {
+  color: #f95959;
+}
+.top_list .bottom .header3 {
+  color: #455d7a;
+}
+.top_list .line {
+  height: 0.5px;
+  width: 80%;
+  background-color: slategrey;
+  margin-left: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+    .profile input[type='text'], .profile input[type='password'] {
+      border-bottom: 1px solid black;
+      border-left: 0px;
+      border-right: 0px;
+      border-top: 0px;
+      width: 200px;
+      background-color: transparent;
+      margin-top: 5px;
+      padding: 5px;
+    }
+
+input:focus {
+     outline: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+    #index_fold, #interest_fold, #money_fold, #commodity_fold {
+      cursor: pointer;
+    }
+
+.issue {
+  margin-top: 20px;
+  float: left;
+}
+.issue table tr .header3 {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.issue table tr td, .issue table tr td, .issue table tr th {
+  padding: 0.7em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.issue table tr .header4 {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.issue table tr .header3 {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+}
+.issue table tr:hover td {
+  background-color: white;
+}
+.issue table, .issue tr, .issue td {
+  border-collapse: collapse;
+}
+.issue .left {
+  float: left;
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 3em;
+}
+
+    #form {
+  float: left;
+  display: none;
+  background-color: white;
+  border-radius: 15px;
+  -webkit-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+-moz-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+width: 80%;
+padding: 10%;
+margin-bottom: 20px;
+transition: all 0.3s ease;
+}
+#form .text, .right .container .bottom .text {
+width: 100%;
+box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+border: 0px;
+padding: 10px;
+font-family: Light;
+transition: all 0.3s ease;
+border-radius: 15px;
+margin-bottom: 10px;
+}
+#form .text:focus, .right .container .text:focus {
+box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+#form .share_button {
+box-shadow: .3rem .3rem .6rem #c8d0e7,
+-.2rem -.2rem .5rem #FFF;
+border: 0px;
+background-color: #09ec32;
+font-family: Light;
+border-radius: 15px;
+padding-top: 10px;
+padding-bottom: 10px;
+width: 20%;
+margin-left: 20px;
+cursor: pointer;
+float: right;
+}
+#form .close_button {
+box-shadow: .3rem .3rem .6rem #c8d0e7,
+-.2rem -.2rem .5rem #FFF;
+border: 0px;
+background-color: rgba(186, 187, 211, 0.2);
+font-family: Light;
+border-radius: 15px;
+padding-top: 10px;
+padding-bottom: 10px;
+cursor: pointer;
+float: right;
+width: calc(80% - 20px);
+}
+
+.right .container {
+background-color: white;
+border-radius: 15px;
+float: left;
+width: 50%;
+height: calc(100% - 65px);
+margin-bottom: 35px;
+-webkit-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+-moz-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+position: relative;
+}
+.right .container .bottom {
+position: absolute;
+bottom: 0px;
+padding-left: 20px;
+padding-right: 20px;
+width: calc(100% - 40px);
+}
+.right .container .bottom div {
+border: 0px;
+background-color: rgba(187,133,171, 0.5);
+font-family: Light;
+border-radius: 15px;
+margin-right: 10px;
+cursor: pointer;
+font-size: 12px;
+margin-bottom: 10px;
+float: left;
+padding: 0.5em;
+}
+.right .container .top {
+width: calc(100% - 40px);
+height: calc(100% - 100px);
+padding: 20px;
+overflow-y: auto;
+}
+.right .container .top::-webkit-scrollbar {
+width: 0px;
+}
+.right .container .top div {
+border-radius: 15px;
+padding: 0.7em;
+background-color: rgba(186, 187, 211, 0.2);
+margin-bottom: 10px;
+display: inline-block;
+min-width: 100px;
+}
+
+    .issue table {
+      width: calc(100% - 20px);
+    }
+    .issue table td {
+      color: grey;
+      font-family: Light;
+    }
+    .issue table .header1, .issue table .header4 {
+      width: 70%;
+    }
+    .issue table .header2, .issue table .header3 {
+      width: 30%;
+    }
+    .issue table .header1 {
+      text-align: left;
+      font-family: Light;
+    }
+    .issue table .header2 {
+      text-align: center;
+      font-family: Light;
+    }
+    #login_form, #register_form, #personal_form {
+      display: none;
+    }
+
+.right .container {
+background-color: white;
+border-radius: 15px;
+float: left;
+width: 50%;
+height: calc(100% - 65px);
+margin-bottom: 35px;
+-webkit-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+-moz-box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+box-shadow: -1px 5px 20px -15px rgba(0,0,0,0.33);
+position: relative;
+}
+.right .container .bottom {
+position: absolute;
+bottom: 0px;
+padding-left: 20px;
+padding-right: 20px;
+width: calc(100% - 40px);
+}
+.right .container .bottom div {
+border: 0px;
+background-color: rgba(187,133,171, 0.5);
+font-family: Light;
+border-radius: 15px;
+margin-right: 10px;
+cursor: pointer;
+font-size: 12px;
+margin-bottom: 10px;
+float: left;
+padding: 0.5em;
+}
+.right .container .top {
+width: calc(100% - 40px);
+height: calc(100% - 100px);
+padding: 20px;
+overflow-y: auto;
+}
+.right .container .top::-webkit-scrollbar {
+width: 0px;
+}
+.right .container .top div {
+border-radius: 15px;
+padding: 0.7em;
+background-color: rgba(186, 187, 211, 0.2);
+margin-bottom: 10px;
+display: inline-block;
+min-width: 100px;
+}
+
+.coin {
+  width: 100%;
+  float: left;
+}
+.coin .right {
+  width: calc(60% - 40px);
+  float: left;
+  background-color: rgba(186, 187, 211, 0.2);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border-radius: 1.5em;
+  margin-top: 20px;
+}
+
+.topbar {
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.topbar .icon {
+  border-radius: 10px;
+  height: 2em;
+  width: 2em;
+  float: left;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topbar .block {
+  font-family: Light;
+  height: 2em;
+  float: left;
+  width: 20%;
+}
+.topbar .text {
+  float: left;
+  margin-top: 0.4em;
+  font-size: 1em;
+  display: inline-block;
+}
+
+.bb_select {
+  font-family: Light;
+  border: 1px solid grey;
+  margin-top: 1em;
+  cursor: pointer;
+}
+.bb_select:focus {
+  outline: none;
+}
+
+.trade_select {
+  background: transparent;
+  font-family: Light;
+  border: 1px solid grey;
+  margin-top: 1em;
+  cursor: pointer;
+}
+.trade_select:focus {
+  outline: none;
+}
+.coin .left {
+  width: 40%;
+  float: left;
+  margin-top: 10%;
+}
+.coin .left table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: Light;
+  width: 70%;
+  margin-left: 15%;
+  text-align: center;
+}
+.coin .left table th {
+padding-bottom: 0.5em;
+border-bottom: 2px solid black;
+}
+.coin .left table .high {
+  border-bottom: 2px solid rgba(128, 128, 128, 0.3);
+}
+.coin .left table .low {
+  border-top: 2px solid rgba(128, 128, 128, 0.3);
+}
+.price1, .price2, .price3,
+.price1_low, .price2_low, .price3_low,
+.price1_high, .price2_high, .price3_high {
+  border-left: 2px solid rgba(128, 128, 128, 0.3);
+  border-right: 2px solid rgba(128, 128, 128, 0.3);
+}
+.offer_color {
+background-color: rgba(69, 93, 122, 0.5);
+color: black !important;
+}
+.bid_color {
+background-color: rgba(249, 89, 89, 0.5) !important;
+}
+.coin .left table .quantity_2 {
+border-right: 2px solid rgba(128, 128, 128, 0.3);
+color: grey;
+}
+.coin .left table .quantity button {
+  color: grey;
+  height: 100%;
+  width: 100%;
+  font-family: Light;
+  padding: 0.5em;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1em;
+  border: 0px;
+}
+.price1_low, .price2_low, .price3_low {
+  background-color: rgba(249, 89, 89, 0.7);
+}
+.price1_high, .price2_high, .price3_high {
+  background-color: rgba(69, 93, 122, 0.7);
+}
+.quantity:hover, .price2_high:hover, .price3_high:hover,
+.price2_low:hover, .price3_low:hover {
+  background-color: rgba(225, 225, 225, 0.7) !important;
+}
+
+.coin .tri_left {
+  float: right;
+}
+.coin .tri_left .interest {
+  font-family: Medium;
+  margin-top: 2em;
+  margin-left: calc(2em + 20px);
+}
+.coin .tri_left .rate {
+  font-family: Bold;
+  margin-left: 10px;
+  font-size: 1.5em;
+  float: left;
+  display: inline-block;
+  margin-top: 0.1em;
+}
+.coin .tri_left .description {
+  font-family: Light;
+  margin-left: 10px;
+  color: grey;
+  margin-top: 1em;
+  float: left;
+}
+.coin .tri_left .icon {
+  border-radius: 10px;
+  height: 2em;
+  aspect-ratio: 1/1;
+  float: left;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+#expand_menu, #profile_menu {
+  display: none;
+  cursor: pointer;
+}
+
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  z-index: 2;
+  cursor: pointer;
+  display: none;
+    }
+#overlay .profile2 {
+width: 20em;
+margin-left: calc(50% - 12em);
+font-family: Light;
+margin-top: calc(50% - 12em);
+background-color: white;
+padding: 2em;
+border-radius: 10px;
+box-shadow:
+inset -3px -3px 3px rgba(82, 82, 82, 0.2),
+inset 3px 3px 3px rgba(0, 0, 0, 0.4);
+    }
+    .profile2 a {
+  text-decoration: none;
+  font-family: Light;
+  cursor: pointer;
+}
+    .profile2 .submit_button {
+      border: 0px;
+      background: transparent;
+      font-family: Light;
+      cursor: pointer;
+    }
+    .profile2 .just_button {
+      border: 0px;
+      background: transparent;
+      color: grey;
+      cursor: pointer;
+      font-family: Light;
+    }
+    .profile2 div {
+      margin-bottom: 40px;
+      font-family: Medium;
+    }
+
+    .profile2 input[type='text'], .profile2 input[type='password'] {
+      border-bottom: 1px solid black;
+      border-left: 0px;
+      border-right: 0px;
+      border-top: 0px;
+      width: 100%;
+      background-color: transparent;
+      margin-top: 5px;
+      padding: 5px;
+    }
+
+#custom_select {
+      display: none;
+      list-style-type: none;
+      padding: 0;
+    }
+    #custom_select li {
+      cursor: pointer;
+    }
+    #bank {
+      border-bottom: 1px solid black;
+    }
+
+.bank_icon {
+    height: 20px;
+    width: 20px;
+}
+
+.tr_cursor {
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .main-menu {
+    width:60px;
+    background-color: rgba(186, 187, 211, 1);
+    overflow: hidden;
+  }
+  .main-menu:hover,nav.main-menu.expanded {
+  width:60px;
+  overflow:hidden;
+  }
+  .main-menu li>a {
+  color:#111;
+  }
+  .main-menu li:hover>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+  color: #111;
+  background-color: rgba(186, 187, 211, 1);
+  }
+  #profile_menu {
+    background-color: rgba(223, 223, 240, 0.6);
+    display: block;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  #profile_menu:hover > a {
+    background-color: rgba(223, 223, 240, 0);
+  }
+
+  #expand_menu {
+    display: block;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .topbar .block {
+    font-size: 0.9rem;
+    width: 25%;
+  }
+
+  .content {
+    width: calc(100% - 120px);
+    padding: 10px;
+    padding-top: 0px;
+    margin-left: 60px;
+  }
+
+  .coin .right {
+    width: 100%;
+  }
+  .coin .left, .topbar, .nft, .coin .left2, .news, .issue .left {
+    width: calc(100% + 40px);
+  }
+
+.top_list {
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+}
+.top_list table {
+  width: calc(50% - 5px);
+  margin-left: 0;
+  float: left;
+}
+.top_list .top {
+  margin-right: 5px;
+}
+.top_list .bottom {
+  margin-left: 5px;
+}
+.top_list .line {
+  display: none;
+}
+.top_list table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.news table {
+  width: 100%;
+}
+.news .h2 {
+  width: calc(100% - 3em);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+  .news .h1, .news .h3, .news .h4, .news .h0 {
+    display: none;
+  }
+
+  .issue .right {
+    display: none;
+  }
+
+  .news table {
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 600px) {
+  .news .h2 {
+    max-width: 20em;
+  }
+}
+}
+    </style>
+    </head>
+    <body>
+    <script>
+        //redirect for small devices
+        if (screen.width <= 699) {
+          document.location = "w3docs.com";
+        }
+    </script>
+
+    <div id='overlay'>
+        <div class="profile2" id="no_user1">
+          <div onclick="off()" style="text-align: right; margin-right: 7px;">x</div>
+        <div>
+        <small>DEALCARD에</small><br/>
+        <text style="font-size: 1.5em;">오신걸 환영합니다.</text>
+          </div>
+        <input type="button" id="login_form_btn1" value="로그인" class="submit_button" />
+        </div>
+
+        <div class="profile2" id="login_form1" style="display: none;">
+            <div onclick="off()" style="text-align: right; margin-right: 7px;">x</div>
+        <div>
+          <form method="post" action="{{ url_for('register_form') }}">
+            <input name='username' required type='text' placeholder='아이디' /><br/>
+            <input name='password' required type='password' placeholder='비밀번호' />
+        </div>
+            <input type="submit" class="submit_button" value="로그인" />
+          </form>
+            <input type="button" class="just_button" value="회원가입" id="register_form_btn1" />
+      </div>
+
+        <script>
+          $("#login_form_btn1").click(function () {
+              $("#no_user1").css("display", "none");
+	    	  $("#login_form1").css("display", "block");
+          });
+        </script>
+
+        <div class="profile2" id="register_form1" style="display: none;">
+            <div onclick="off()" style="text-align: right; margin-right: 7px;">x</div>
+        <div>
+          <form method="post" action="{{ url_for('register') }}">
+            <input name='username' required type='text' placeholder='아이디 (불변)' /><br/>
+            <input name='nickname' required type='text' placeholder='닉네임' /><br/>
+            <input name='password' required type='password' placeholder='비밀번호' />
+        </div>
+        <input type="submit" class="submit_button" value="가입" />
+        </form>
+        <input type="button" class="just_button" value="로그인" id="login_form_btn3" />
+      </div>
+
+        <script>
+          $("#register_form_btn1").click(function () {
+              $("#login_form1").css("display", "none");
+	    	  $("#register_form1").css("display", "block");
+          });
+
+          $("#login_form_btn3").click(function () {
+              $("#register_form1").css("display", "none");
+	    	  $("#login_form1").css("display", "block");
+          });
+        </script>
+
+      </div>
+
+    <nav class="main-menu" id="main-menu">
+
+              {% if profile_card == "no_user" %}
+          <div class="profile" id="no_user">
+            <div>
+                <small>DEALCARD에</small><br/>
+                <text style="font-size: 1.5em;">오신걸 환영합니다.</text>
+            </div>
+            <input type="button" id="login_form_btn" value="로그인" class="submit_button" />
+          </div>
+
+      <div class="profile" id="login_form">
+        <div>
+          <form method="post" action="{{ url_for('register_form') }}">
+            <input name='username' required type='text' placeholder='아이디' /><br/>
+            <input name='password' required type='password' placeholder='비밀번호' />
+        </div>
+            <input type="submit" class="submit_button" value="로그인" />
+          </form>
+            <input type="button" class="just_button" value="회원가입" id="register_form_btn" />
+      </div>
+
+        <script>
+          $("#login_form_btn").click(function () {
+              $("#no_user").css("display", "none");
+	    	  $("#login_form").css("display", "block");
+          });
+        </script>
+
+      <div class="profile" id="register_form">
+        <div>
+          <form method="post" action="{{ url_for('register') }}">
+            <input name='username' required type='text' placeholder='아이디 (불변)' /><br/>
+            <input name='nickname' required type='text' placeholder='닉네임' /><br/>
+            <input name='password' required type='password' placeholder='비밀번호' />
+        </div>
+        <input type="submit" class="submit_button" value="가입" />
+        </form>
+        <input type="button" class="just_button" value="로그인" id="login_form_btn2" />
+      </div>
+
+      <script>
+          $("#register_form_btn").click(function () {
+              $("#login_form").css("display", "none");
+	    	  $("#register_form").css("display", "block");
+          });
+
+          $("#login_form_btn2").click(function () {
+              $("#register_form").css("display", "none");
+	    	  $("#login_form").css("display", "block");
+          });
+        </script>
+
+      {% if login_error == "wrong_credentials" %}
+        <script>
+          alert('주의 : 사용자 정보가 틀렸습니다');
+        </script>
+        {% elif login_error == "existing_user" %}
+        <script>
+          alert('주의 : 이미 사용중인 아이디/닉네임 입니다');
+        </script>
+        {% endif %}
+
+      {% elif profile_card == "logged_in" %}
+      <div class="profile" id="user_card">
+          <div>
+            <text>
+              {% for user in user_info %}
+              {% if user[4] < 10 %}
+              ⚪
+              {% elif user[4] > 9 and user[4] < 20 %}
+              🟡
+              {% elif user[4] > 19 and user[4] < 30 %}
+              🟠
+              {% elif user[4] > 29 and user[4] < 40 %}
+              🟢
+              {% elif user[4] > 39 and user[4] < 50 %}
+              🟣
+              {% elif user[4] > 49 and user[4] < 60 %}
+              🔴
+              {% elif user[4] > 59 and user[4] < 70 %}
+              🔵
+              {% elif user[4] > 69 and user[4] < 80 %}
+              🟤
+              {% elif user[4] > 79 and user[4] < 90 %}
+              ⚫
+              {% elif user[4] > 89 and user[4] < 100 %}
+              🔥
+              {% elif user[4] > 99 %}
+              💯
+              {% endif %}
+               {{ user[1] }}
+              {% endfor %}
+            </text> ({% for user in user_info %}{{ user[4] }}{% endfor %}단)<br/><br/>
+            <small><text style="font-family: Light; color: grey;">다음 단까지 사회점수
+
+            {% for user in user_info %}
+            {% set x = 50 + (100 * user[2]) %}
+            {% set points = x - user[3] %}
+              {{ points }}
+            {% endfor %}
+
+              점</text></small><br/>
+          </div>
+        <input type="submit" value="수정" class="submit_button" id="personal_form_btn" />
+      </div>
+
+      <div class="profile" id="personal_form" style="padding-bottom: 2.5em;">
+        <div>
+          <form method="post" action="{{ url_for('personal_edit') }}">
+            {% for user in user_info %}
+                <input name='nickname' required type='text' placeholder='닉네임' value="{{ user[1] }}" />
+              {% if user[9] == "" %}
+                <input type="text" contenteditable="false" onclick="show_list()" placeholder="은행/코인" id="bank" name="bank" />
+              {% elif user[9] != "" %}
+                <input type="text" contenteditable="false" onclick="show_list()" placeholder="{{ user[9] }}" id="bank" name="bank" />
+              {% endif %}
+            {% endfor %}
+              <ul id="custom_select">
+                  코인
+              {% for x in bank_list %}
+              {% if x[0] == 1 %}
+                  <li onclick="copy_bank('{{ x[1] }}')">
+                  <img class="bank_icon" src="{{ x[2] }}" />
+                  {{ x[1] }}
+                  </li>
+              {% endif %}
+              {% endfor %}
+                  증권
+              {% for x in bank_list %}
+              {% if x[0] == 2 %}
+                  <li onclick="copy_bank('{{ x[1] }}')">
+                  <img class="bank_icon" src="{{ x[2] }}" />
+                  {{ x[1] }}
+                  </li>
+              {% endif %}
+              {% endfor %}
+                  은행
+              {% for x in bank_list %}
+              {% if x[0] == 3 %}
+                  <li onclick="copy_bank('{{ x[1] }}')">
+                  <img class="bank_icon" src="{{ x[2] }}" />
+                  {{ x[1] }}
+                  </li>
+              {% endif %}
+              {% endfor %}
+                  페이
+              {% for x in bank_list %}
+              {% if x[0] == 4 %}
+                  <li onclick="copy_bank('{{ x[1] }}')">
+                  <img class="bank_icon" src="{{ x[2] }}" />
+                  {{ x[1] }}
+                  </li>
+              {% endif %}
+              {% endfor %}
+                  </ul>
+        </div>
+          {% for user in user_info %}
+          <input type="text" placeholder="계좌번호 / 주소" value="{{ user[9] }}" name="address" />
+          {% endfor %}
+        <input type="submit" class="submit_button" value="저장" style="float: left;" />
+          </form>
+          <form method="post" action="{{ url_for('logout') }}" style="float: left; margin-left: 0.7em;">
+            <input type="submit" class="just_button" value="로그아웃" />
+          </form>
+      </div>
+
+<script>
+function show_list() {
+  document.getElementById('custom_select').style.display = "block";
+}
+function copy_bank(x) {
+  document.getElementById("bank").innerHTML = x;
+}
+</script>
+
+      <script>
+          $("#personal_form_btn").click(function () {
+            $("#personal_form").css("display", "block");
+            $("#user_card").css("display", "none");
+          });
+        </script>
+
+        {% endif %}
+
+      <ul>
+
+              <li id="profile_menu">
+                  <a>
+                      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                      {% if profile_card == "logged_in" %}
+                      <span class="nav-text">
+                          {% for user in user_info %}
+              {% if user[4] < 10 %}
+              ⚪
+              {% elif user[4] > 9 and user[4] < 20 %}
+              🟡
+              {% elif user[4] > 19 and user[4] < 30 %}
+              🟠
+              {% elif user[4] > 29 and user[4] < 40 %}
+              🟢
+              {% elif user[4] > 39 and user[4] < 50 %}
+              🟣
+              {% elif user[4] > 49 and user[4] < 60 %}
+              🔴
+              {% elif user[4] > 59 and user[4] < 70 %}
+              🔵
+              {% elif user[4] > 69 and user[4] < 80 %}
+              🟤
+              {% elif user[4] > 79 and user[4] < 90 %}
+              ⚫
+              {% elif user[4] > 89 and user[4] < 100 %}
+              🔥
+              {% elif user[4] > 99 %}
+              💯
+              {% endif %}
+               {{ user[1] }}
+              {% endfor %}(
+            {% for user in user_info %}
+               {{ user[4] }}
+              {% endfor %}
+            단)
+                      </span>
+                      {% elif profile_card == "no_user" %}
+                      <span class="nav-text" onclick="on()">
+                          로그인
+                      </span>
+                  </a>
+              </li>
+
+        {% endif %}
+        {% if profile_card == "logged_in" %}
+          <li>
+                    <a href="{{ url_for('history') }}" class="menu_item" onclick="activate('history')" id="history">
+                        <i class="fa fa-history fa-2x"></i>
+                        <span class="nav-text">
+                            거래내역
+                        </span>
+                    </a>
+                </li>
+        {% endif %}
+
+                <li>
+                    <a href="#Coin" class="menu_item" onclick="activate('menu_Coin')" id="menu_Coin">
+                        <i class="fa fa-solid fa-wallet fa-2x"></i>
+                        <span class="nav-text">
+                            코인거래
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#BigBlind" class="menu_item" onclick="activate('menu_BigBlind')" id="menu_BigBlind">
+                        <i class="fa fa-solid fa-bitcoin-sign fa-2x"></i>
+                        <span class="nav-text">
+                            Big Blind
+                        </span>
+                    </a>
+
+                </li>
+
+                <li>
+                    <a href="#SmallBlindA" class="menu_item" onclick="activate('menu_SmallBlindA')" id="menu_SmallBlindA">
+                       <i class="fa fa-light fa-coins fa-2x"></i>
+                        <span class="nav-text">
+                            Small Blind A
+                        </span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#SmallBlindB" class="menu_item" onclick="activate('menu_SmallBlindB')" id="menu_SmallBlindB">
+                       <i class="fa fa-solid fa-piggy-bank fa-2x"></i>
+                        <span class="nav-text">
+                            Small Blind B
+                        </span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#Securities" class="menu_item" onclick="activate('menu_Securities')" id="menu_Securities">
+                        <i class="fa fa-bar-chart-o fa-2x"></i>
+                        <span class="nav-text">
+                            증권
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#Chart" class="menu_item" onclick="activate('menu_Chart')" id="menu_Chart">
+                       <i class="fa fa-table fa-2x"></i>
+                        <span class="nav-text">
+                            맞춤형지표
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="#List" class="menu_item" onclick="activate('menu_List')" id="menu_List">
+                        <i class="fa fa-solid fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            상한가 / 하한가
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#Issues" class="menu_item" onclick="activate('menu_Issues')" id="menu_Issues">
+                       <i class="fa fa-solid fa-newspaper fa-2x"></i>
+                        <span class="nav-text">
+                            공유이슈
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#Chatrooms" class="menu_item" onclick="activate('menu_Chatrooms')" id="menu_Chatrooms">
+                       <i class="fa fa-solid fa-comments-dollar fa-2x"></i>
+                        <span class="nav-text">
+                            인기방 / 공고
+                        </span>
+                    </a>
+                </li>
+
+                <li id="expand_menu">
+                    <a>
+                       <i class="fa fa-solid fa-ellipsis fa-2x" id="expand_icon"></i>
+                    </a>
+                </li>
+            </ul>
+
+      {% if profile_card == "logged_in" %}
+            <ul class="logout">
+                <li>
+                   <a href="#">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            <form method="post" action="{{ url_for('logout') }}">
+                                <input type="submit" class="just_button" value="로그아웃" />
+                            </form>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
+        </nav>
+
+    <script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+          function activate(x) {
+            var mi = document.getElementsByClassName('menu_item');
+            for(var i = 0; i < mi.length; i++) {
+               mi[i].classList.remove("active");
+            }
+            document.getElementById(x).classList.add("active");
+          }
+
+          $( document ).ready(function() {
+            $("#expand_menu").click( function () {
+              var width = $("#main-menu").width();
+              if (width < 200) {
+                $("#main-menu").width(250);
+                $("#main-menu").css("overflow", "visible");
+                $("#expand_icon").css("color", "grey");
+              } else {
+                $("#main-menu").width(60);
+                $("#main-menu").css("overflow", "hidden");
+                $("#expand_icon").css("color", "black");
+              }
+            });
+          });
+        </script>
+
+    <div class="content">
+
+          <div class="topbar" id="Coin">
+              <div class="block">
+                  <div class="icon" style="background-color: white;">
+                      <i class="fa-solid fa-ticket fab" style="float: left;"></i></div>
+                <div class="text">충전 {{ ticket_total }}원</div>
+              </div>
+              <div class="block">
+                  <div class="icon" style="background-color: white;">
+                      <i class="fa-solid fa-coins" style="float: left;"></i></div>
+                <div class="text">보유 {{ token_total }}개</div>
+              </div>
+              <div class="block">
+                <div class="icon" style="background-color: #fff;">
+                    <i class="fa-solid fa-barcode" style="float: left;"></i>
+                </div>
+                <div class="text">개당 {{ buy_price }}원</div>
+              </div>
+              <div class="block">
+                <div class="icon" style="background-color: white;">
+                    <i class="fa-solid fa-table-list" style="float: left;"></i></div>
+                <div class="text">청산대기: {{ pending_total }}건</div>
+              </div>
+              <div class="block">
+                  {% if profit_rate == "increase" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% elif profit_rate == "decrease" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% elif profit_rate == "equal" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% endif %}
+                <div class="text">수익 {{ profit }}%</div>
+              </div>
+        </div>
+
+      <div class="coin" style="padding-top: 2px;" id="BigBlind">
+
+            <div class="right">
+              <ul style="margin-left: -10px; width: 50%; float: left;">
+                <li class="menu">Big Blind</li>
+                <li class="submenu">딜카드 개미투자 전용코인</li>
+              </ul>
+
+                <div id="BB_chart">
+
+              <div class="tri_left">
+                <div class="interest">전일대비</div>
+                  {% if spot_trend == "increase" %}
+                <div class="icon" style="background-color: #f95959;">&#8679;</div>
+                  {% elif spot_trend == "decrease" %}
+                <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                  {% elif spot_trend == "equal" %}
+                <div class="icon" style="background-color: grey;">=</div>
+                  {% endif %}
+                <div class="rate">{{ spot_rate }}%</div>
+              </div>
+
+              <canvas id="bigblind_line" style="width:100%; "></canvas>
+              <script>
+
+            const list = [
+              {% for x in BB_dates %}
+              {% if not loop.last %}
+              '{{ x }}',
+              {% elif loop.last %}
+              '{{ x }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+              var xValues = list;
+              var yValues = {{ BB_values }};
+
+              new Chart("bigblind_line", {
+                type: "line",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(153, 0, 204)",
+                    borderColor: "rgb(204, 153, 255)",
+                    data: yValues
+                  }]
+                },
+                options: {
+                elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
+                  legend: {display: false},
+                }
+              });
+              </script>
+                    </div>
+            </div>
+
+          <script>
+var yesterday_spot = {{ yesterday_spot }};
+
+$("#test").click(function(){
+ $.ajax({
+  url: '/bb_minute',
+  type: 'post',
+  data: { yesterday_spot : yesterday_spot },
+  success: function(response){
+   $("#BB_chart").html(response);
+  }
+ });
+});
+          </script>
+
+        <div class="left" id="BB_table">
+              <table>
+                <tr class="high">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ high2 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ high2_quantity }}</button></td>
+                    </form>
+
+                  <td class="price1_high">{{ high2 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ high2 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ high2_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="high">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ high1 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ high1_quantity }}</button></td>
+                    </form>
+
+                    <td class="price1_high">{{ high1 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ high1_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="pv">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ spot_quantity }}</button></td>
+                    </form>
+
+                    <td class="price1">{{ spot }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ spot }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity"><button type="submit">{{ spot_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="low">
+                  <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ low1 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ low1_quantity }}</button></td>
+                  </form>
+
+                    <td class="price1_low">{{ low1 }}</td>
+
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ low1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ low1_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+                <tr class="low">
+                    <form method="post" action="{{ url_for('sell_BB') }}">
+                        <input style="display: none;" value="{{ low2 }}" name="price" />
+                        <input style="display: none;" value="{{ token_total }}" name="token_total" />
+                        <td class="quantity"><button type="submit">{{ low2_quantity }}</button></td>
+                    </form>
+                  <td class="price1_low">{{ low2 }}</td>
+                    <form method="post" action="{{ url_for('buy_BB') }}">
+                        <input style="display: none;" value="{{ low2 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ low2_quantity_buy }}</button></td>
+                    </form>
+                </tr>
+              </table>
+            </div>
+
+        {% if msg == "failed_time" %}
+        <script>
+          alert('주의 : 지금은 장내 시간이 아닙니다\n\n장내시간 : 주중 9:00 - 15:00');
+        </script>
+        {% elif msg == "exists_A" %}
+          <script>
+            alert('주의 : Small Blind A 약정은 한개만 보유 가능합니다');
+          </script>
+        {% elif msg == "exists_B" %}
+          <script>
+            alert('주의 : Small Blind B 약정은 한개만 보유 가능합니다');
+          </script>
+        {% elif msg == "notenough" %}
+          <script>
+            alert('주의 : 충전이 필요합니다');
+          </script>
+          {% elif msg == "failed_login" %}
+          <script>
+              alert('주의 : 로그인 후에 이용해주시길 바랍니다');
+          </script>
+        {% endif %}
+
+        <script>
+        setInterval(function(){
+          var token_total = {{ token_total }};
+
+            $.ajax({
+		type: "post",
+		url : "/BB_table",
+		data: { token_total: token_total },
+		success: function(result){
+		    $("#BB_table").html(result);
+		},
+		error:function(){
+            //
+		}
+	})
+
+        }, 3000);
+
+        setInterval(function(){
+          var token_total = {{ token_total }};
+          var spot = {{ spot }};
+
+            $.ajax({
+		type: "post",
+		url : "/BB_profit",
+		data: { token_total: token_total, spot: spot },
+		success: function(result){
+		    $("#Coin").html(result);
+		},
+		error:function(){
+            //
+		}
+	})
+
+        }, 3000);
+
+              </script>
+
+        </div>
+
+      <div class="coin" style="padding-top: 2px;" id="SmallBlindA">
+
+            <div class="right">
+              <ul style="margin-left: -10px; width: 50%; float: left;">
+                <li class="menu">Small Blind A</li>
+                <li class="submenu">딜카드 고정금리 발행채</li>
+                <li class="submenu" style="color: black; margin-top: 5px;">약정하면 현 환율로 기한동안 거래할 수 있음</li>
+              </ul>
+              <div class="tri_left">
+                <div class="interest">오늘의 환율</div>
+                  {% if open_close == "increase" %}
+                <div class="icon" style="background-color: #f95959;">&#8679;</div>
+                  {% elif open_close == "decrease" %}
+                <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                  {% elif open_close == "equal" %}
+                <div class="icon" style="background-color: grey;">=</div>
+                  {% endif %}
+                <div class="rate">{{ open }}원</div>
+              </div>
+              <canvas id="smallblind_line" style="width:100%; "></canvas>
+              <script>
+              const listA = [
+              {% for x in SBA_dates %}
+              {% if not loop.last %}
+              '{{ x }}',
+              {% elif loop.last %}
+              '{{ x }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+              var xValues = listA;
+              var yValues = {{ SBA_rates }};
+              var zValues = {{ SBA_trades }};
+
+              new Chart("smallblind_line", {
+                type: "line",
+                data: {
+                  labels: xValues,
+
+                datasets: [{
+                    label: "환율",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(153, 0, 204)",
+                    borderColor: "rgb(204, 153, 255)",
+                    data: yValues
+      },
+      {
+                    label: "거래량 x 10",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "#9cd3d3",
+                    borderColor: "#9cd3d3",
+                    data: zValues
+      }
+    ]
+  },
+                options: {
+                elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
+                  legend: {display: true},
+                }
+              });
+              </script>
+            </div>
+
+        <div class="left">
+              <table>
+                  <tr>
+                      <th>수량 (개)</th>
+                      <th>만기 (개월)</th>
+                      <th>월납부 (원)</th>
+                  </tr>
+                <tr class="high">
+
+                    {% set SBA1 = open * 50 %}
+
+                  <td class="quantity_2">50</td>
+
+                  <td class="quantity_2">5</td>
+
+                    <form method="post" action="{{ url_for('buy_SBA') }}">
+                        <input style="display: none;" value="50" name="quantity" />
+                        <input style="display: none;" value="5" name="misc" />
+                        <input style="display: none;" value="{{ SBA1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ SBA1 }}</button></td>
+                    </form>
+
+                </tr>
+                  <tr class="high">
+
+                    {% set SBA1 = open * 30 %}
+                  <td class="quantity_2">30</td>
+
+                  <td class="quantity_2">4</td>
+
+                    <form method="post" action="{{ url_for('buy_SBA') }}">
+                        <input style="display: none;" value="30" name="quantity" />
+                        <input style="display: none;" value="4" name="misc" />
+                        <input style="display: none;" value="{{ SBA1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ SBA1 }}</button></td>
+                    </form>
+
+                </tr>
+                  <tr class="low">
+
+                    {% set SBA1 = open * 20 %}
+                  <td class="quantity_2">20</td>
+
+                  <td class="quantity_2">3</td>
+
+                    <form method="post" action="{{ url_for('buy_SBA') }}">
+                        <input style="display: none;" value="20" name="quantity" />
+                        <input style="display: none;" value="3" name="misc" />
+                        <input style="display: none;" value="{{ SBA1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ SBA1 }}</button></td>
+                    </form>
+
+                </tr>
+                  <tr class="low">
+
+                    {% set SBA1 = open * 10 %}
+                  <td class="quantity_2">10</td>
+
+                  <td class="quantity_2">2</td>
+
+                    <form method="post" action="{{ url_for('buy_SBA') }}">
+                        <input style="display: none;" value="10" name="quantity" />
+                        <input style="display: none;" value="2" name="misc" />
+                        <input style="display: none;" value="{{ SBA1 }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity offer_color"><button type="submit" style="color: black;">{{ SBA1 }}</button></td>
+                    </form>
+
+                </tr>
+              </table>
+            </div>
+
+        </div>
+
+      <div class="coin" style="padding-top: 2px;" id="SmallBlindB">
+        <div class="right">
+              <ul style="margin-left: -10px; width: 50%; float: left;">
+                <li class="menu">Small Blind B</li>
+                <li class="submenu">딜카드 원금보장형 콜러블 환율스왑</li>
+                <li class="submenu" style="color: black; margin-top: 5px;">기한의 20%가 경과한 시점부터 해지 가능한 발행채로 콜옵션을 행사하지 않은채로 만기일에 도달하였다면 토큰과 원금을
+                  재교환함</li>
+              </ul>
+              <div class="tri_left">
+                <div class="interest">오늘의 만기일</div>
+                  {% if misc_trend == "increase" %}
+                <div class="icon" style="background-color: #f95959;">&#8679;</div>
+                  {% elif misc_trend == "decrease" %}
+                <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                  {% elif misc_trend == "equal" %}
+                <div class="icon" style="background-color: grey;">=</div>
+                  {% endif %}
+                  {% for x in misc_today %}
+                  {% for y in x %}
+                <div class="rate">{{ y }}개월</div>
+                  {% endfor %}
+                  {% endfor %}
+              </div>
+              <canvas id="smallblind_line2" style="width:100%; "></canvas>
+              <script>
+              const listB = [
+              {% for x in misc_dates %}
+              {% if not loop.last %}
+              '{{ x }}',
+              {% elif loop.last %}
+              '{{ x }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+              var xValues = listB;
+              var yValues = {{ period }};
+              var zValues = {{ period_z }};
+
+              new Chart("smallblind_line2", {
+                type: "line",
+                data: {
+                  labels: xValues,
+
+                  datasets: [{
+                    label: "환율",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgb(153, 0, 204)",
+                    borderColor: "rgb(204, 153, 255)",
+                    data: yValues
+      },
+      {
+                    label: "거래량",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "#9cd3d3",
+                    borderColor: "#9cd3d3",
+                    data: zValues
+      }
+    ]
+  },
+
+                options: {
+                elements: {
+                    point:{
+                        radius: 0
+                    }
+                },
+                  legend: {display: true},
+                }
+              });
+              </script>
+            </div>
+
+        <div class="left">
+            <table>
+                <tr>
+                    <th>콜행사가능일</th>
+                    <th>만기일</th>
+                </tr>
+                <tr>
+                    <td class="quantity_2">{{ call_date }}</td>
+                    <td style="color: grey; padding: 0.5em;">{{ end_date }}</td>
+                </tr>
+            </table>
+              <table style="margin-top:2em;">
+                  <tr>
+                      <th>수량</th>
+                      <th>교환값</th>
+                  </tr>
+                <tr class="pv">
+                  <td class="quantity_2">100</td>
+                    {% set SBB_spot = spot * 100 %}
+
+                    <form method="post" action="{{ url_for('buy_SBB') }}">
+                        <input style="display: none;" value="100" name="quantity" />
+                        <input style="display: none;" value="{{ call_date }}" name="call_date" />
+                        <input style="display: none;" value="{{ end_date }}" name="end_date" />
+                        <input style="display: none;" value="{{ SBB_spot }}" name="price" />
+                        <input style="display: none;" value="{{ ticket_total }}" name="ticket_total" />
+                        <td class="quantity bid_color"><button type="submit" style="color: black;">{{ SBB_spot }}</button></td>
+                    </form>
+
+                </tr>
+              </table>
+            </div>
+
+        </div>
+
+      <div class="nft" id="search" style="padding-top: 2px;" id="Securities">
+              <ul style="margin-left: -10px;">
+                <li class="menu">증권분석</li>
+                <li class="submenu">즐겨찾는 종목 <text id="index_fold">&#8645;</text></li>
+              </ul>
+              <div style="width: 100%; float: left;">
+              <div id="index">
+                {% for favorite in favorable %}
+              <table class="t1">
+                <tr>
+                  <td class="header1"><a href="{{ url_for('item', id=favorite[1]) }}">{{ favorite[0] }}</a></td>
+                  <td class="header2"><input type="checkbox" checked id="{{ favorite[3] }}" onchange="remove_favorite('{{ favorite[3] }}')" class="checkbox_timer" /></td>
+                </tr>
+              </table>
+                {% endfor %}
+              </div>
+              </div>
+              <div style="width: 100%; float: left;">
+                <ul style="margin-left: -10px;">
+                  <li class="submenu">인기종목 <text id="interest_fold">&#8645;</text></li>
+                </ul>
+                <div id="interest">
+                  {% for item in item_list: %}
+                <table class="t1">
+                  <tr>
+                    <td class="header1"><a href="{{ url_for('item', id=item[1]) }}">{{ item[0] }}</a></td>
+                    <td class="header2"><input type="checkbox" id="{{ item[3] }}" onchange="add_favorite('{{ item[3] }}')" class="checkbox_timer" /></td>
+                  </tr>
+                </table>
+                  {% endfor %}
+              </div>
+              </div>
+
+        </div>
+
+        <script>
+$(document).ready(function () {
+  $("#interest_fold").trigger('click');
+});
+
+$("#index_fold").click(function () {
+  $("#index").toggle(500)
+});
+$("#interest_fold").click(function () {
+  $("#interest").toggle(500)
+});
+
+const fav_list = [
+              {% for x in favorable %}
+              {% if not loop.last %}
+              '{{ x[3] }}',
+              {% elif loop.last %}
+              '{{ x[3] }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+function remove_favorite(x) {
+        if (fav_list.length == 1) {
+            alert('주의 : 최소 1개 종목을 선택 해야 합니다');
+            document.getElementById(x).checked = true;
+        } else {
+            $("input.checkbox_timer").attr("disabled", true);
+            setTimeout(function() {
+                $("input.checkbox_timer").removeAttr("disabled");
+                }, 4000);
+
+            fav_list.shift(x);
+            if ( {{ profile_card }} == "logged_in" ) {
+                $.ajax({
+                                url: "/remove_favorites",
+                                type: "post",
+                                data: { symbol: x },
+                                success: function(response) {
+                                    //
+                                }
+                                })
+            } else {
+                reload_chart();
+            }
+        }
+}
+
+function add_favorite(x) {
+    fav_list.push(x);
+    $("input.checkbox_timer").attr("disabled", true);
+            setTimeout(function() {
+                $("input.checkbox_timer").removeAttr("disabled");}, 4000);
+
+    if ( {{ profile_card }} == "logged_in" ) {
+            $.ajax({
+                                url: "/add_favorites",
+                                type: "post",
+                                data: { symbol: x },
+                                success: function(response) {
+                                    //
+                                }
+                                })
+        } else {
+            reload_chart();
+        }
+}
+        </script>
+
+      <div class="coin" style="padding-top: 2px;" id="Chart">
+                <div class="right">
+                  <ul style="margin-left: -10px; width: 50%; float: left;">
+                    <li class="menu">맞춤형지표</li>
+                    <li class="submenu">선택종목 표준 실적</li>
+                  </ul>
+                  <div class="tri_left">
+                    <div class="interest">전일대비</div>
+                      {% if compare_rate == 'decrease' %}
+                    <div class="icon" style="background-color: #455d7a;">&#8681;</div>
+                      {% elif compare_rate == 'increase' %}
+                    <div class="icon" style="background-color: #f95959;">&#8679;</div>
+                      {% elif compare_rate == 'equal' %}
+                    <div class="icon" style="background-color: grey;">=</div>
+                      {% endif %}
+                    <div class="rate">{{ compare }}%</div>
+                  </div>
+                  <canvas id="trend" style="width:100%; "></canvas>
+                  <script>
+                  const list3 = [
+              {% for x in time_list %}
+              {% if not loop.last %}
+              '{{ x }}',
+              {% elif loop.last %}
+              '{{ x }}'
+              {% endif %}
+              {% endfor %}
+              ];
+
+              var yValues = {{ mean_list }};
+              var xValues = list3;
+
+                  new Chart("trend", {
+                    type: "line",
+                    data: {
+                      labels: xValues,
+                      datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgb(153, 0, 204)",
+                        borderColor: "rgb(204, 153, 255)",
+                        data: yValues
+                      }]
+                    },
+                    options: {
+                    elements: { point: { radius: 0 }},
+                      legend: {display: false},
+                    },
+                  });
+                  </script>
+                </div>
+
+          <form method="post" action="{{ url_for('day_list') }}" style="display: none;">
+              <input id="fav_list" name="fav_list" />
+              <input type="submit" id="day_submit" />
+          </form>
+
+          <script>
+              function reload_chart() {
+                document.getElementById('fav_list').value = fav_list;
+                document.getElementById('day_submit').click();
+              }
+          </script>
+
+        <div class="left2" id="List">
+                  <div class="top_list" id="fave_list">
+                    <table class="top">
+                        {% for fav in favorable_up %}
+                      <tr><a href="{{ url_for('item', id=fav[1]) }}">
+                        <td class="header1">{{ loop.index }}.</td>
+                        <td class="header2">
+                            {{ fav[1] }}
+                        </td>
+                        <td class="header3">{{ fav[0] }}%</td>
+                      </a></tr>
+                        {% endfor %}
+                    </table>
+                      {% if favorable_up|length and favorable_down|length %}
+                    <div class="line"></div>
+                      {% endif %}
+                    <table class="bottom">
+                        {% for fav in favorable_down %}
+                      <tr><a href="{{ url_for('item', id=fav[1]) }}">
+                        <td class="header1">{{ loop.index }}.</td>
+                        <td class="header2">{{ fav[1] }}</td>
+                        <td class="header3">{{ fav[0] }}%</td>
+                      </a></tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+
+        </div>
+
+        <script>
+        function fave_list() {
+              $.ajax({
+                                url: "/fave_list",
+                                type: "post",
+                                data: { data_list : {{ favorable }} },
+                                success: function(response) {
+                                    $("#fave_list").html(response);
+                                }
+                                });
+              }
+        </script>
+
+      <div class="issue" id="Issues">
+                    <ul style="padding-left: 10;">
+                      <li class="menu">공유이슈</li>
+                      <li class="submenu">최근에 공유된 정보</li>
+                    </ul>
+
+        <div class="news">
+                        <table>
+                          {% for new in news: %}
+                            <tr>
+                                <td class="h0">{{ new[1] }}nickname</td>
+                                <td class="h1">{{ new[5] }}time</td>
+                                <td class="h2">{{ new[2] }}title</td>
+                                <td class="h3">{{ new[6] }}category</td>
+                                <td class="h4">{{ new[7] }}sub_category</td>
+                                <td class="h5"><img src="{{url_for('static', filename='door.png')}}" width="25px" height="25px" /></td>
+                            </tr>
+                          {% endfor %}
+                          </table>
+                      </div>
+
+        <div class="left" id="Chatrooms">
+                    <ul style="padding-left: 10;">
+                      <li class="menu">인기방</li>
+                      <li class="submenu">최근 12시간 가장 뜨거운 인기방</li>
+                    </ul>
+                    <table>
+                      <tr>
+                        <th class="header1">대화방</th>
+                        <th class="header2">신규 챗</th>
+                      </tr>
+                      {% for chatroom in chatrooms: %}
+                      <tr id="{{ chatroom[0] }}_{{ chatroom[1] }}" onclick="change_room('{{ chatroom[0] }}_{{ chatroom[1] }}')" class="tr_cursor">
+                        <td class="header4">{{ chatroom[0] }}</td>
+                        <td class="header3">{{ chatroom[2] }}</td>
+                      </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+
+      <input style="display: none;" value="world" id="item_id" />
+      <input style="display: none;" value="world" id="name" />
+
+          <script>
+          function change_room(x) {
+                var mi = document.getElementsByClassName('tr_cursor');
+                            for(var i = 0; i < mi.length; i++) {
+                                mi[i].style.backgroundColor = "transparent";
+                            }
+                document.getElementById(x).style.backgroundColor = "white";
+
+                var result = x.split("_");
+                var item_id = document.getElementById("item_id");
+                var name = document.getElementById("name");
+
+                item_id.value = result[0];
+                name.value = result[1];
+
+                var ii = item_id.value;
+
+                    $.ajax({
+                                url: "/reload_chat",
+                                type: "get",
+                                data: { ii: ii },
+                                success: function(response) {
+                                    $("#div").html(response);
+                                }
+                                })
+          }
+                      </script>
+
+        <div class="right">
+                    <div class="container">
+                      <div class="top" id="div"></div>
+                      <div class="bottom">
+                        <div onclick="copy('안녕하세요')">안녕하세요</div><div onclick="copy('ㅋㅋㅋ')">ㅋㅋㅋ</div><div onclick="copy('ㅎㅇㅌ')">ㅎㅇㅌ</div><div onclick="copy('ㅠㅠ')">ㅠㅠ</div>
+                        <form id="form2"><input type="text" placeholder="생각을 공유하세요..." class="text" id="text" required /></form>
+                      </div>
+                      </div>
+                    </div>
+
+            <script>
+            setInterval(function(){
+            var ii = document.getElementById("item_id").value;
+
+                    $.ajax({
+                type: "get",
+                url : "/reload_chat",
+                data: { ii: ii },
+                success: function(result){
+                    $("#div").html(result);
+                },
+                error:function(){
+                    //
+                }
+            })
+
+            }, 5000);
+
+
+            var item_id = $("#item_id").val();
+            var name = $("#name").val();
+
+            $('#text').keypress(function (e) {
+                          if (e.which == 13) {
+                             var text = $("#text").val();
+
+                             var link = $("#link").text();
+
+                             if (text != "") {
+
+                             if (link != "") {
+                             let data = {text: text, item_id: item_id, name: name, link: link};
+                             let jsonStr = JSON.stringify(data);
+
+                             $.ajax({
+                              type: 'POST',
+                              url: '/add_news',
+                              data: JSON.stringify(data),
+                              contentType: "application/json; charset=UTF-8",
+                              success: function(response) {
+                                $("#text").val('');
+
+                                $.ajax({
+                                  url: "/reload_news",
+                                  type: "get",
+                                  data: { item_id: item_id },
+                                  success: function(response) {
+                                    $("#table").html(response);
+                                  }
+                                });
+
+                              }
+                             })
+
+                             } else {
+                             let data = {text: text, item_id: item_id, name: name};
+                             let jsonStr = JSON.stringify(data);
+
+                                $.ajax({
+            		              type: 'POST',
+            	    	          url: '/add_chat',
+            	    	          data: JSON.stringify(data),
+            	    	          contentType: "application/json; charset=UTF-8",
+            	    	          success: function(response) {
+            	    	            $('#text').val('');
+
+            	    	            $.ajax({
+                                    url: "/reload_chat",
+                                    type: "get",
+                                    data: { item_id: item_id },
+                                    success: function(response) {
+                                        $("#div").html(response);
+                                      }
+                                   });
+                		           }
+                    	        })
+                               }
+                             }
+                          }
+                        });
+
+            function copy(x) {
+              document.getElementById("text").value = x;
+              document.getElementById("text").focus();
+            }
+
+            $(document).ready(function () {
+              $("#link").click(function () {
+                $("#link").val('');
+                $("#link").css('display', 'none');
+
+                $("#text").attr("placeholder", "생각을 공유하세요.....");
+              });
+            });
+
+            function check_url()
+            {
+             var regex = /https?:\/\/[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g;
+             if($('#text').val().match(regex))
+             {
+
+              let result = $('#text').val().match(regex);
+
+              $("#link").css("display", "block");
+              $("#link").text(result);
+
+              $('#text').val('');
+
+              $("#text").attr("placeholder", "기사를 설명해주세요.");
+
+            }
+            }
+            </script>
+
+                </div>
+
+      </div>
+
+    {% if anchor is defined %}
+    <script>
+        window.location.hash="{{ anchor }}";
+    </script>
+    {% endif %}
+      </body>
+      </html>

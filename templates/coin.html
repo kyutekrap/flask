@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="block">
+                  <div class="icon" style="background-color: white;">
+                      <i class="fa-solid fa-ticket fab" style="float: left;"></i></div>
+                <div class="text">충전 {{ ticket_total }}원</div>
+              </div>
+              <div class="block">
+                  <div class="icon" style="background-color: white;">
+                      <i class="fa-solid fa-coins" style="float: left;"></i></div>
+                <div class="text">보유 {{ token_total }}개</div>
+              </div>
+              <div class="block">
+                <div class="icon" style="background-color: #fff;">
+                    <i class="fa-solid fa-barcode" style="float: left;"></i>
+                </div>
+                <div class="text">개당 {{ buy_price }}원</div>
+              </div>
+              <div class="block">
+                <div class="icon" style="background-color: white;">
+                    <i class="fa-solid fa-table-list" style="float: left;"></i></div>
+                <div class="text">청산대기: {{ pending_total }}건</div>
+              </div>
+              <div class="block">
+                  {% if profit_rate == "increase" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% elif profit_rate == "decrease" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% elif profit_rate == "equal" %}
+                <div class="icon" style="background-color: grey; color: white;">&#61;</div>
+                  {% endif %}
+                <div class="text">수익 {{ profit }}%</div>
+              </div>
+</body>
+</html>
